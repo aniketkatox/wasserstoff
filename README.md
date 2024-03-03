@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) .
+This project is built with Next.js and MongoDB and provides functionality for uploading files, compressing them, and viewing PDF files.
 
 ## Getting Started
 
