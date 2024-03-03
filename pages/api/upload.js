@@ -4,6 +4,7 @@ import generateGuid from "@/lib/guidGenerator";
 import clientPromise from "./../../lib/mongodb";
 import formidable from "formidable";
 import fs from 'fs';
+import path from "path";
 const { PDFDocument } = require('pdf-lib');
 const AWS = require('aws-sdk');
 
@@ -116,6 +117,8 @@ function sleep(ms) {
 // function to decompressing PDF file
 async function decompressPDF(inputFilePath, outputFilePath) {
     try {
+        var parentDir = path.resolve(process.cwd());
+        console.log("cwd current : ",parentDir)
         const pdfBytes = fs.readFileSync(inputFilePath);
         const pdfDoc = await PDFDocument.load(pdfBytes);
 
