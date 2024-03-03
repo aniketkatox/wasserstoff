@@ -5,6 +5,7 @@ import clientPromise from "./../../lib/mongodb";
 import formidable from "formidable";
 import fs from 'fs';
 import path from "path";
+import { file } from "jszip";
 const { PDFDocument } = require('pdf-lib');
 const AWS = require('aws-sdk');
 
@@ -26,17 +27,16 @@ export default async (req, res) => {
             let fields, files;
             [fields, files] = await form.parse(req);
 
-            // const uploadDirectory = "./uploadedFiles/";
-            const uploadDirectory = "./public/";
             const uploadedFile = files.pdfFile;
             let filePath = uploadedFile[0].filepath;
+            let newFilePath = filePath + '_new';
 
             const compressionEnabled = fields.enableCompression[0] == 'true' ? true : false;
             
             await sleep(100);
 
             if (compressionEnabled) {
-                await decompressPDF(uploadedFile[0].filepath, uploadDirectory + uploadedFile[0].originalFilename);
+                await decompressPDF(uploadedFile[0].filepath, newFilePath);
             }
             await sleep(100);
 
@@ -55,7 +55,7 @@ export default async (req, res) => {
             }
 
             if (compressionEnabled) {
-                filePath = uploadDirectory + uploadedFile[0].originalFilename;
+                filePath = newFilePath;
             }
 
 
