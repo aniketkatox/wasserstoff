@@ -25,7 +25,8 @@ export default async (req, res) => {
             let fields, files;
             [fields, files] = await form.parse(req);
 
-            const uploadDirectory = "./uploadedFiles/";
+            // const uploadDirectory = "./uploadedFiles/";
+            const uploadDirectory = "./public/";
             const uploadedFile = files.pdfFile;
             let filePath = uploadedFile[0].filepath;
 
